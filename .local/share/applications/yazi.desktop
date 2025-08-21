@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Yazi
+Exec=foot -e bash -ic yazi
+Icon=yazi
+Terminal=false
+Type=Application
+Categories=Utility;System;

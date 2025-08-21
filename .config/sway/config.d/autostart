@@ -1,0 +1,37 @@
+# Environment variable
+exec dbus-update-activation-environment --systemd DISPLAY XAUTHORITY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway XDG_SESSION_TYPE=wayland XDG_SESSION_DESKTOP=sway
+
+# Start gnome keyring daemon
+exec --no-startup-id gnome-keyring-daemon --start --components=secrets
+
+# Start blueman-applet
+exec blueman-applet 
+
+# Polkit authentication
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+    
+# Set wallpaper
+exec_always swaybg -i /home/kevin/.local/share/wallpapers/art/wallhaven-j5ldjq.jpg -m fill
+
+# Set GTK settings
+set $gnome_schema org.gnome.desktop.interface
+exec {
+    gsettings set $gnome_schema gtk-theme "Rosepine-Dark"
+    gsettings set $gnome_schema icon-theme "Adwaita"
+    gsettings set $gnome_schema cursor-theme "Adwaita"
+    gsettings set $gnome_schema font-name "Adwaita Sans 11"
+    gsettings set $gnome_schema font-hinting "full"
+    gsettings set $gnome_schema font-antialiasing "rgba"        
+}
+
+# Cliphist
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
+
+# Idle configuration
+exec swayidle -w \
+        timeout 300 'swaylock -f -C ~/.config/sway/swaylock/config' \
+        # timeout 500 'swaymsg "output * power off"' \
+        timeout 1800 'systemctl suspend' \
+        # resume 'swaymsg "output * power on"' \
+        before-sleep 'playerctl pause; swaylock -f -C ~/.config/sway/swaylock/config'
