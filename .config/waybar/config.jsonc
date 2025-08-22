@@ -1,7 +1,7 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 30,
+  "height": 24,
   "modules-left": ["sway/workspaces", "sway/window"],
 
   "modules-center": [],
@@ -10,6 +10,7 @@
     "tray",
     "sway/scratchpad",
     "network",
+    "cpu",
     "memory",
     "pulseaudio",
     "clock"
@@ -79,6 +80,13 @@
     "format-charging": "{capacity}%  ",
     "format-plugged": "{capacity}%  ",
     "format-icons": [" ", " ", " ", " ", " "]
+  },
+
+  "cpu": {
+    "interval": 10,
+    "format": "{}%  ",
+    "max-length": 10,
+    "on-click": "foot --title htop -e htop"
   },
 
   "memory": {
