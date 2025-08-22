@@ -38,6 +38,11 @@ use = "yazi-rs/plugins:chmod"
 rev = "e95c7b3"
 hash = "1adc12c2b2b025411ab61eb8f0879574"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:jump-to-char"
+rev = "e95c7b3"
+hash = "d2f04875bbd4ed3dd5696e8c4b094fde"
+
 [[flavor.deps]]
 use = "Mintass/rose-pine"
 rev = "8343340"
