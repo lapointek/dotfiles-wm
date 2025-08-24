@@ -158,11 +158,14 @@ bindsym --whole-window --border {
     $mod+Shift+button5 resize grow width 20px or 2ppt
 }
 
-###############################
-#  App Shortcuts and Actions  #
-###############################
+#######################################
+#  Application Shortcuts and Actions  #
+#######################################
 # Start a terminal
 bindsym $mod+Return exec $term
+
+# Start a terminal in a floating window
+bindsym $mod+Shift+Return exec $term --title "foot-floating" 
 
 # Start launcher
 bindsym $mod+d exec $launcher
@@ -175,6 +178,9 @@ bindsym $mod+o exec nemo
 
 # Yazi
 bindsym $mod+y exec foot -e bash -ic yazi
+
+# Start Yazi in a floating window
+bindsym $mod+Shift+y exec foot --title "yazi-floating" -e bash -ic yazi
 
 # Firefox
 bindsym $mod+n exec firefox
