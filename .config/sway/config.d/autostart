@@ -11,11 +11,12 @@ exec blueman-applet
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
     
 # Set wallpaper
-exec_always swaybg -i /home/kevin/.local/share/wallpapers/art/wallhaven-j5ldjq.jpg -m fill
+set $wallpaper /home/kevin/.local/share/wallpapers/art/wallhaven-j5ldjq.jpg
+output * bg $wallpaper fill
 
 # Set GTK settings
 set $gnome_schema org.gnome.desktop.interface
-exec {
+exec_always {
     gsettings set $gnome_schema gtk-theme "Rosepine-Dark"
     gsettings set $gnome_schema icon-theme "Adwaita"
     gsettings set $gnome_schema cursor-theme "Adwaita"
