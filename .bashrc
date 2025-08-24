@@ -8,25 +8,37 @@
 # Set default terminal
 export TERMINAL=foot
 # Set default editor
-export EDITOR='nvim'
+export EDITOR=nvim
 
 # --- Source .inputrc ---
 # Apply .inputrc changes on sourcing .bashrc
 bind -f ~/.inputrc
 
-# --- Variables ---
+# --- History options ---
 HISTTIMEFORMAT='%y-%m-%d %H:%M '
 HISTCONTROL=ignoredups:erasedups:ignorespace
 HISTSIZE=5000
 HISTFILESIZE=10000
 
-# Do not overwrite the history file upon exit of terminal session
-shopt -s histappend
-shopt -s checkwinsize
-shopt -s autocd
-
 # Ensure command history is updated and synchronized across multiple sessions
 PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+
+# Do not overwrite the history file upon exit of terminal session
+shopt -s histappend
+
+# --- Optional shell features ---
+# Update terminal
+shopt -s checkwinsize
+# cd into directory automatically
+shopt -s autocd
+# Auto-correct typos in directory names
+shopt -s cdspell
+# Save multi-line commands
+shopt -s lithist
+# Store multi-line commands as a single history entry
+shopt -s cmdhist
+# Warn before exiting if background jobs are running
+shopt -s checkjobs
 
 # --- Aliases ---
 alias ls='ls --color=auto'

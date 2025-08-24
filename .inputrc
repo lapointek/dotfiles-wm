@@ -1,9 +1,9 @@
+# Show tab completion immediately
 set show-all-if-ambiguous on
+# Tab completion ignores case
 set completion-ignore-case on
+# Turn off bell
 set bell-style none
-
-"\C-f": history-search-backward
-"\C-e": history-search-forward
 
 # Color files by types
 set colored-stats On
@@ -16,3 +16,5 @@ set colored-completion-prefix On
 # Color the common prefix in menu-complete
 set menu-complete-display-prefix On
 
+"\C-f": history-search-backward
+"\C-e": history-search-forward

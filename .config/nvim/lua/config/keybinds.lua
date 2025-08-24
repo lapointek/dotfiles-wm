@@ -28,6 +28,9 @@ vim.keymap.set("v", "p", '"_dp', opts)
 -- Delete without copying
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
+-- Delete line without affecting line break and copying
+vim.keymap.set({ "n", "v" }, "<leader>D", [["_D]])
+
 -- Prevent deleted character from copying to clipboard
 vim.keymap.set("n", "x", '"_x', opts)
 
