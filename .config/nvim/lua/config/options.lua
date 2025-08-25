@@ -46,7 +46,7 @@ vim.opt.completeopt = "menu,noselect"                   -- Options for insert-mo
 vim.opt.clipboard:append("unnamedplus")                 -- Use system clipboard
 vim.opt.selection = "inclusive"                         -- Selection behavior
 vim.opt.timeout = true
-vim.opt.timeoutlen = 5000
+vim.opt.timeoutlen = 1000
 
 -- File Handling Options
 vim.opt.autoread = true                                 -- Write the contents, if it has been modified
