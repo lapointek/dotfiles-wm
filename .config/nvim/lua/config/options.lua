@@ -1,3 +1,5 @@
+
+
 -- User Interface
 vim.opt.number = true			                        -- Line Numbers
 vim.opt.relativenumber = true	                        -- Relative line numbers
@@ -19,7 +21,7 @@ vim.opt.synmaxcol = 300                                 -- Syntax highlighting l
 vim.opt.diffopt:append("linematch:60")                  -- Diff behavior
 
 -- Editing
-vim.opt.wrap = false		                            -- Wrap long lines
+vim.opt.wrap = false    	                            -- Wrap long lines
 vim.opt.tabstop = 4                                     -- Tab width
 vim.opt.shiftwidth = 4                                  -- Indent width
 vim.opt.softtabstop = 4                                 -- Soft tab stop
@@ -28,7 +30,7 @@ vim.opt.smartindent = true                              -- Smart auto-indenting
 vim.opt.autoindent = true                               -- Copy indentation of the previous line
 vim.opt.smarttab = true                                 -- Smart tab
 vim.opt.backspace = { "start", "eol", "indent" }
-              
+
 -- Search
 vim.opt.ignorecase = true 		                        -- Ignore case in search patterns
 vim.opt.smartcase = true		                        -- Override ignorecase if search has uppercase
@@ -36,7 +38,7 @@ vim.opt.hlsearch = true			                        -- Highlight search matches
 vim.opt.wrapscan = true			                        -- Wrap around end of file in searches
 vim.opt.incsearch = true                                -- Incremental highlighting
 vim.opt.inccommand = "split"                            -- Interactive live preview
-             
+
 -- Input and Completion
 vim.opt.mouse = "a"                                     -- Mouse support
 vim.opt.wildmenu = true                                 -- Command-line completion
@@ -47,6 +49,7 @@ vim.opt.clipboard:append("unnamedplus")                 -- Use system clipboard
 vim.opt.selection = "inclusive"                         -- Selection behavior
 vim.opt.timeout = true
 vim.opt.timeoutlen = 1000
+vim.opt.updatetime = 250
 
 -- File Handling Options
 vim.opt.autoread = true                                 -- Write the contents, if it has been modified

@@ -1,8 +1,15 @@
 -- Set leader key to space
-vim.g.mapleader = " "		                         
+vim.g.mapleader = " "
+
+-- Exit terminal mode
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 
 -- File explorer
 vim.keymap.set("n", "<leader>cd", vim.cmd.Ex)
+
+
+vim.keymap.set("n", "<leader>m", "<CMD>NvimTreeFocus<CR>", {desc = "Focus on file explorer"})
+vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>", {desc = "Toggle file explorer"})
 
 -- Better indenting in visual mode
 vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
