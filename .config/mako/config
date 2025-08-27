@@ -12,7 +12,7 @@ default-timeout=5000
 max-visible=5
 
 # Font
-font=Iosevka Nerd Font 11 
+font=JetBrains Mono Nerd Font 10
 
 # Position
 anchor=top-right

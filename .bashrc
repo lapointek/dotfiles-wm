@@ -76,7 +76,7 @@ osc7_cwd() {
 }
 PROMPT_COMMAND=${PROMPT_COMMAND:+${PROMPT_COMMAND%;}; }osc7_cwd
 
-# --- Yazi setup --- 
+# --- Yazi setup ---
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -102,4 +102,3 @@ export FZF_DEFAULT_OPTS="
 eval "$(starship init bash)"
 # Set zoxide
 eval "$(zoxide init bash)"
-

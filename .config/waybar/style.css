@@ -8,8 +8,8 @@
 }
 
 #waybar {
-  font-family: "Iosevka Nerd Font";
-  font-size: 14px;
+  font-family: "JetBrains Mono Nerd Font";
+  font-size: 13px;
   background-color: @base;
 }
 
@@ -47,7 +47,7 @@ tooltip label {
 #scratchpad,
 #tray,
 #memory {
-  padding: 0px 10px;
+  padding: 0px 8px;
   color: @text;
 }
 
