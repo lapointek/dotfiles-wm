@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Vim
 Exec=foot --title=vim -e vim -- %F
-Icon=vim
+Icon=org.vim.Vim
 Terminal=false
 Type=Application
 Categories=Utility;TextEditor;
