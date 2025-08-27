@@ -1,5 +1,3 @@
-
-
 -- User Interface
 vim.opt.number = true			                        -- Line Numbers
 vim.opt.relativenumber = true	                        -- Relative line numbers
@@ -49,7 +47,7 @@ vim.opt.clipboard:append("unnamedplus")                 -- Use system clipboard
 vim.opt.selection = "inclusive"                         -- Selection behavior
 vim.opt.timeout = true
 vim.opt.timeoutlen = 1000
-vim.opt.updatetime = 250
+vim.opt.updatetime = 1000
 
 -- File Handling Options
 vim.opt.autoread = true                                 -- Write the contents, if it has been modified
@@ -59,7 +57,7 @@ vim.opt.writebackup = false                             -- Make a backup before 
 vim.opt.swapfile = false                                -- Whether to use swap files
 vim.opt.undofile = true                                 -- Enable persistent undo
 vim.opt.undodir = vim.fn.expand("~/.vim/nvim-undo")     -- Directory to store undo file
- 
+
 -- Performance
 vim.opt.redrawtime = 10000                              -- Time spent on redrawing the screen
 

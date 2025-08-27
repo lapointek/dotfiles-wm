@@ -7,9 +7,13 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 -- File explorer
 vim.keymap.set("n", "<leader>cd", vim.cmd.Ex)
 
-
-vim.keymap.set("n", "<leader>m", "<CMD>NvimTreeFocus<CR>", {desc = "Focus on file explorer"})
-vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>", {desc = "Toggle file explorer"})
+vim.keymap.set("n", "<leader>ff", function() require("fzf-lua").files() end, {desc = "fzf files"})
+vim.keymap.set("n", "<leader>fg", function() require("fzf-lua").live_grep() end, {desc = "fzf live grep"})
+vim.keymap.set("n", "<leader>fb", function() require("fzf-lua").buffers() end, {desc = "fzf buffers"})
+vim.keymap.set("n", "<leader>fh", function() require("fzf-lua").help_tags() end, {desc = "fzf help tags"})
+vim.keymap.set("n", "<leader>fx", function() require("fzf-lua").diagnostics_document() end, {desc = "fzf diagnostics document"})
+vim.keymap.set("n", "<leader>fx", function() require("fzf-lua").diagnostics_workspace() end, {desc = "fzf diagnostics workspace"})
+vim.keymap.set("n", "<leader>fs", function() require("fzf-lua").lsp_document_symbols() end, {desc = "fzf document symbols"})
 
 -- Better indenting in visual mode
 vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
