@@ -5,8 +5,6 @@
 [[ $- != *i* ]] && return
 
 # --- User environment variables ---
-# Set default terminal
-export TERMINAL=foot
 # Set default editor
 export EDITOR=nvim
 

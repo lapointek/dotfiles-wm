@@ -4,26 +4,18 @@ exec dbus-update-activation-environment --systemd DISPLAY XAUTHORITY WAYLAND_DIS
 # Start gnome keyring daemon
 exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 
+# Set default terminal
+exec gsettings set org.cinnamon.desktop.default-applications.terminal exec foot
+
 # Start blueman-applet
-exec blueman-applet 
+exec blueman-applet
 
 # Polkit authentication
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-    
-# Set wallpaper
-set $wallpaper /home/kevin/.local/share/wallpapers/summer/wallhaven-2eo1w6.jpg 
-output * bg $wallpaper fill
 
-# Set GTK settings
-set $gnome_schema org.gnome.desktop.interface
-exec_always {
-    gsettings set $gnome_schema gtk-theme "Rosepine-Dark"
-    gsettings set $gnome_schema icon-theme "Adwaita"
-    gsettings set $gnome_schema cursor-theme "Adwaita"
-    gsettings set $gnome_schema font-name "Adwaita Sans 11"
-    gsettings set $gnome_schema font-hinting "full"
-    gsettings set $gnome_schema font-antialiasing "rgba"        
-}
+# Set wallpaper
+set $wallpaper /home/kevin/.local/share/wallpapers/summer/wallhaven-2eo1w6.jpg
+output * bg $wallpaper fill
 
 # Cliphist
 exec wl-paste --type text --watch cliphist store
