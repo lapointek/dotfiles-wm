@@ -109,10 +109,17 @@ export FZF_DEFAULT_OPTS="
 	--color=spinner:#f6c177,info:#9ccfd8
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
+# --- Git integration ---
+if [[ -r /usr/share/git/completion/ ]]; then
+    . /usr/share/git/completion/git-completion.bash
+    . /usr/share/git/completion/git-prompt.sh
+fi
+
+# --- Bash prompt ---
+export PS1="\n\t \[\033[32m\]\w\[\033[35m\]\$(GIT_PS1_SHOWUNTRACKEDFILES=1 GIT_PS1_SHOWDIRTYSTATE=1 __git_ps1)\[\033[00m\]\n$ "
+
 # --- Execute shell commands ---
 # Set fzf key-bindings and completion
 eval "$(fzf --bash)"
-# Set starship prompt
-eval "$(starship init bash)"
 # Set zoxide
 eval "$(zoxide init bash)"
