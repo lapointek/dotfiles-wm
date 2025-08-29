@@ -25,7 +25,7 @@ PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
 shopt -s histappend
 
 # --- Optional shell features ---
-# Update terminal
+# Updates terminal LINES and COLUMNS after each command
 shopt -s checkwinsize
 # cd into directory automatically
 shopt -s autocd
@@ -83,9 +83,23 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-# --- FZF setup ---
-source /usr/share/fzf/key-bindings.bash
-source /usr/share/fzf/completion.bash
+# --- fzf environment variables ---
+# CTRL-Y to copy the command into clipboard using wl-copy
+export FZF_CTRL_R_OPTS="
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | wl-copy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# Print tree structure in the preview window
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"
 
 # Rosé Pine fzf theme
 export FZF_DEFAULT_OPTS="
@@ -96,6 +110,8 @@ export FZF_DEFAULT_OPTS="
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
 # --- Execute shell commands ---
+# Set fzf key-bindings and completion
+eval "$(fzf --bash)"
 # Set starship prompt
 eval "$(starship init bash)"
 # Set zoxide

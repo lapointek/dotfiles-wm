@@ -4,7 +4,6 @@ set show-all-if-ambiguous on
 set completion-ignore-case on
 # Turn off bell
 set bell-style none
-
 # Color files by types
 set colored-stats On
 # Append char to indicate type

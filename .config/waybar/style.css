@@ -8,8 +8,8 @@
 }
 
 #waybar {
-  font-family: "Iosevka Nerd Font";
-  font-size: 13px;
+  font-family: "Iosevka";
+  font-size: 15px;
   background-color: @base;
 }
 
@@ -43,6 +43,7 @@ tooltip label {
 #pulseaudio,
 #window,
 #network,
+#bluetooth,
 #cpu,
 #scratchpad,
 #tray,

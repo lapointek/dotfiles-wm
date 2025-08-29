@@ -7,9 +7,6 @@ exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 # Set default terminal
 exec gsettings set org.cinnamon.desktop.default-applications.terminal exec foot
 
-# Start blueman-applet
-exec blueman-applet
-
 # Polkit authentication
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 

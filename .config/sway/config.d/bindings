@@ -192,10 +192,10 @@ bindsym $mod+Shift+n exec brave
 bindsym $mod+i exec spotify-launcher
 
 # Clipboard manager
-bindsym $mod+Ctrl+v exec cliphist list | $launcher -d -w 90 -l 30 -p "Select an entry to copy it to your clipboard buffer:"| cliphist decode | wl-copy
+bindsym $mod+Ctrl+v exec cliphist list | $launcher -d -w 90 -l 30 -p "Select an entry to copy it to your clipboard buffer: "| cliphist decode | wl-copy
 
 # Delete entry from clipboard
-bindsym $mod+Ctrl+x exec cliphist list | $launcher -d -w 90 -l 30 -t  ebbcbaff -S ebbcbaff -p "Select an entry to delete it from cliphist:"| cliphist delete
+bindsym $mod+Ctrl+x exec cliphist list | $launcher -d -w 90 -l 30 -t  ebbcbaff -S ebbcbaff -p "Select an entry to delete it from cliphist: "| cliphist delete
 
 # Start window switcher script
 bindsym $mod+p exec ~/.config/sway/scripts/window_switcher.sh

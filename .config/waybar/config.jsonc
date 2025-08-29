@@ -1,7 +1,7 @@
 {
   "layer": "top",
-  "position": "top",
-  "height": 24,
+  "position": "bottom",
+  // "height": 24,
   "modules-left": ["sway/workspaces", "sway/window"],
 
   "modules-center": [],
@@ -9,6 +9,7 @@
   "modules-right": [
     "tray",
     "sway/scratchpad",
+    "bluetooth",
     "network",
     "cpu",
     "memory",
@@ -33,7 +34,7 @@
   },
 
   "tray": {
-    "icon-size": 14,
+    "icon-size": 16,
     "spacing": 10
   },
 
@@ -42,7 +43,7 @@
   },
 
   "clock": {
-    "format": "{:%a %b %d %I:%M %p}",
+    "format": "{:%F %I:%M %p}",
     "tooltip-format": "<big>{:%A %m/%d}</big>\n<tt><small>{calendar}</small></tt>",
     "calendar": {
       "format": {
@@ -63,11 +64,21 @@
   },
 
   "network": {
-    "format-wifi": "{signalStrength}%  ",
+    "format-wifi": "net:{signalStrength}%",
     "tooltip-format": "{essid} - {ifname}: {ipaddr}/{cidr}",
-    "format-ethernet": "{ipaddr}/{cidr} 󰈀 ",
-    "format-disconnected": "  Disconnected",
+    "format-ethernet": "{ipaddr}/{cidr}",
+    "format-disconnected": "net:disconnected",
     "format-alt": "↓{bandwidthDownBits} ↑{bandwidthUpBits}"
+  },
+
+  "bluetooth": {
+	"format": "bt:{status}",
+	"format-disabled": "",
+	"format-connected": "bt:{num_connections}",
+	"tooltip-format": "{controller_address}",
+	"tooltip-format-connected": "{device_enumerate}",
+	"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "blueman-manager"
   },
 
   "battery": {
@@ -76,22 +87,21 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "{capacity}% {icon}",
-    "format-charging": "{capacity}%  ",
-    "format-plugged": "{capacity}%  ",
-    "format-icons": [" ", " ", " ", " ", " "]
+    "format": "bat:{capacity}%",
+    "format-charging": "chg:{capacity}%",
+    "format-plugged": "plg:{capacity}%"
   },
 
   "cpu": {
     "interval": 10,
-    "format": "{}%  ",
+    "format": "cpu:{}%",
     "max-length": 10,
     "on-click": "foot --title htop -e htop"
   },
 
   "memory": {
     "interval": 30,
-    "format": "{}%  ",
+    "format": "mem:{}%",
     "max-length": 10,
     "tooltip": true,
     "tooltip-format": "Memory - {used:0.1f}GB used",
@@ -100,11 +110,8 @@
 
   "pulseaudio": {
     "scroll-step": 2,
-    "format": "{volume}% {icon}",
-    "format-muted": "Muted  ",
-    "format-icons": {
-      "default": [" ", " ", " "]
-    },
+    "format": "vol:{volume}%",
+    "format-muted": "vol:muted",
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-right": "foot --title wiremix -e wiremix"
   }
