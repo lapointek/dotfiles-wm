@@ -40,10 +40,9 @@ shopt -s checkjobs
 
 # --- Aliases ---
 alias ls='ls --color=auto'
-alias ll='ls -l --color=auto'
-alias la='ls -a --color=auto'
-alias lla='ls -la --color=auto'
-alias l='ls -CF --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 alias grep='grep --color=auto'
 
 # Move to the parent folder.
@@ -116,7 +115,7 @@ if [[ -r /usr/share/git/completion/ ]]; then
 fi
 
 # --- Bash prompt ---
-export PS1="\n\t \[\033[32m\]\w\[\033[35m\]\$(GIT_PS1_SHOWUNTRACKEDFILES=1 GIT_PS1_SHOWDIRTYSTATE=1 __git_ps1)\[\033[00m\]\n$ "
+export PS1="\n\t \[\033[35m\]\w\[\033[32m\]\$(GIT_PS1_SHOWUNTRACKEDFILES=1 GIT_PS1_SHOWDIRTYSTATE=1 __git_ps1)\[\033[00m\]\n$ "
 
 # --- Execute shell commands ---
 # Set fzf key-bindings and completion
