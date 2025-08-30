@@ -7,6 +7,8 @@
 # --- User environment variables ---
 # Set default editor
 export EDITOR=nvim
+# Set sudo editor value i.e. sudo -e
+export SUDO_EDITOR=$EDITOR
 
 # --- Source .inputrc ---
 # Apply .inputrc changes on sourcing .bashrc
@@ -39,12 +41,13 @@ shopt -s cmdhist
 shopt -s checkjobs
 
 # --- Aliases ---
-alias ls='eza --icons --git'
-alias lg='eza -la --git --grid --icons'
+alias ls='eza --group-directories-first --icons=auto --git'
 alias ll='ls -alF'
 alias la='ls -A'
+alias lt='eza --tree --level=2 --long --git'
 alias l='ls -F'
 alias grep='grep --color=auto'
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 
 # Move to the parent folder.
 alias ..='cd ..;pwd'
@@ -110,16 +113,27 @@ export FZF_DEFAULT_OPTS="
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
 # --- Git integration ---
-if [[ -r /usr/share/git/completion/ ]]; then
-    . /usr/share/git/completion/git-completion.bash
-    . /usr/share/git/completion/git-prompt.sh
+if [[ -f /usr/share/git/completion/git-completion.bash ]]; then
+    source /usr/share/git/completion/git-completion.bash
+fi
+if [[ -f /usr/share/git/completion/git-prompt.sh ]]; then
+    source /usr/share/git/completion/git-prompt.sh
 fi
 
 # --- Bash prompt ---
 export PS1="\n\t \[\033[35m\]\w\[\033[32m\]\$(GIT_PS1_SHOWUNTRACKEDFILES=1 GIT_PS1_SHOWDIRTYSTATE=1 __git_ps1)\[\033[00m\]\n$ "
 
+# --- Bash completion ---
+if [[ -r /usr/share/bash-completion/bash_completion ]]; then
+    source /usr/share/bash-completion/bash_completion
+fi
+
 # --- Execute shell commands ---
-# Set fzf key-bindings and completion
-eval "$(fzf --bash)"
-# Set zoxide
-eval "$(zoxide init bash)"
+if command -v fzf &> /dev/null; then
+    # Set fzf key-bindings and completion
+    eval "$(fzf --bash)"
+fi
+if command -v zoxide &> /dev/null; then
+    # Set zoxide
+    eval "$(zoxide init bash)"
+fi
