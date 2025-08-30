@@ -11,7 +11,7 @@ exec gsettings set org.cinnamon.desktop.default-applications.terminal exec foot
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Set wallpaper
-set $wallpaper /home/kevin/.local/share/wallpapers/summer/wallhaven-2eo1w6.jpg
+set $wallpaper /$HOME/.local/share/wallpapers/art/cat_leaves.png
 output * bg $wallpaper fill
 
 # Cliphist

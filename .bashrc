@@ -39,10 +39,11 @@ shopt -s cmdhist
 shopt -s checkjobs
 
 # --- Aliases ---
-alias ls='ls --color=auto'
+alias ls='eza --icons --git'
+alias lg='eza -la --git --grid --icons'
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -F'
 alias grep='grep --color=auto'
 
 # Move to the parent folder.

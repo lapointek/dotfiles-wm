@@ -1,6 +1,6 @@
 # Set inner/outer gaps
-default_border pixel 1
-default_floating_border pixel 1
+default_border pixel 2
+default_floating_border pixel 2
 
 # Default font
 font pango:Noto Sans Bold 9

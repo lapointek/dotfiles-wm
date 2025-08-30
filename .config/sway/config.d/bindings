@@ -90,10 +90,10 @@ bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
 # Switch to next workspace
-bindsym Alt+Tab workspace next                                      
+bindsym ctrl+Tab workspace next
 
 # Switch to previous workspace
-bindsym Alt+Shift+Tab workspace prev 
+bindsym ctrl+Shift+Tab workspace prev
 
 # Switch workspaces back and forth
 bindsym $mod+Tab workspace back_and_forth
@@ -165,12 +165,12 @@ bindsym --whole-window --border {
 bindsym $mod+Return exec $term
 
 # Start a terminal in a floating window
-bindsym $mod+Shift+Return exec $term --title "foot-floating" 
+bindsym $mod+Shift+Return exec $term --title "foot-floating"
 
 # Start launcher
 bindsym $mod+d exec $launcher
 
-# Start wmenu 
+# Start wmenu
 bindsym $mod+Shift+d exec $menu
 
 # Nemo
@@ -234,7 +234,7 @@ bindsym --locked XF86MonBrightnessDown exec --no-startup-id ~/.config/sway/scrip
 bindsym $mod+Shift+s exec ~/.config/sway/scripts/grimshot.sh --notify save area
 
 # Capture a window selected manually
-bindsym Shift+Print exec ~/.config/sway/scripts/grimshot.sh --notify save window 
+bindsym Shift+Print exec ~/.config/sway/scripts/grimshot.sh --notify save window
 
 # Capture the currently active window
 bindsym ctrl+Print exec ~/.config/sway/scripts/grimshot.sh --notify save active

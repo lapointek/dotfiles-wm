@@ -15,8 +15,12 @@
 
 #workspaces button {
   padding: 0px 5px;
-  color: @muted;
   min-width: 10px;
+  color: @text;
+}
+
+#workspaces button.empty {
+    color: @muted;
 }
 
 #workspaces button.focused {
@@ -27,15 +31,6 @@
 #workspaces button.urgent {
   background-color: @love;
   color: @base;
-}
-
-tooltip {
-  background: @base;
-  border: 1px solid @overlay;
-}
-
-tooltip label {
-  color: @text;
 }
 
 #clock,
@@ -58,4 +53,13 @@ tooltip label {
 
 #battery.critical {
   color: @love;
+}
+
+tooltip {
+  background: @base;
+  border: 1px solid @overlay;
+}
+
+tooltip label {
+  color: @text;
 }
