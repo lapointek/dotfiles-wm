@@ -47,7 +47,6 @@ alias la='ls -A'
 alias lt='eza --tree --level=2 --long --git'
 alias l='ls -F'
 alias grep='grep --color=auto'
-alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 
 # Move to the parent folder.
 alias ..='cd ..;pwd'
@@ -89,20 +88,23 @@ function y() {
 # --- fzf environment variables ---
 # CTRL-Y to copy the command into clipboard using wl-copy
 export FZF_CTRL_R_OPTS="
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | wl-copy)+abort'
-  --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard'"
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | wl-copy)+abort'
+    --color header:italic
+    --header 'Press CTRL-Y to copy command into clipboard'
+    --height=50%"
 
 # Preview file content using bat (https://github.com/sharkdp/bat)
 export FZF_CTRL_T_OPTS="
-  --walker-skip .git,node_modules,target
-  --preview 'bat -n --color=always {}'
-  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+    --walker-skip .git,node_modules,target
+    --preview 'bat -n --color=always {}'
+    --bind 'ctrl-/:change-preview-window(down|hidden|)'
+    --height=50%"
 
 # Print tree structure in the preview window
 export FZF_ALT_C_OPTS="
-  --walker-skip .git,node_modules,target
-  --preview 'tree -C {}'"
+    --walker-skip .git,node_modules,target
+    --preview 'eza --tree --color=always {}'
+    --height=50%"
 
 # Rosé Pine fzf theme
 export FZF_DEFAULT_OPTS="
