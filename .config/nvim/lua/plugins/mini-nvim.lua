@@ -8,6 +8,5 @@ return {
     { "echasnovski/mini.trailspace", version = "*", opts = {} },
     { "echasnovski/mini.statusline", version = "*", opts = {} },
     { "echasnovski/mini.tabline", version = "*", opts = {} },
-    { "echasnovski/mini.completion", version = "*", opts = {} },
     { "echasnovski/mini.cursorword", version = "*", opts = {} },
 }

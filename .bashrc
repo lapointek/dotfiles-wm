@@ -41,7 +41,7 @@ shopt -s cmdhist
 shopt -s checkjobs
 
 # --- Aliases ---
-alias ls='eza --group-directories-first --icons=auto --git'
+alias ls='eza --group-directories-first --git'
 alias ll='ls -alF'
 alias la='ls -A'
 alias lt='eza --tree --level=2 --long --git'
