@@ -4,18 +4,12 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# --- User environment variables ---
-# Set default editor
-export EDITOR=nvim
-# Set sudo editor value i.e. sudo -e
-export SUDO_EDITOR=$EDITOR
-
 # --- Source .inputrc ---
 # Apply .inputrc changes on sourcing .bashrc
 bind -f ~/.inputrc
 
 # --- History options ---
-HISTTIMEFORMAT='%y-%m-%d %H:%M '
+HISTTIMEFORMAT="%y-%m-%d %H:%M "
 HISTCONTROL=ignoredups:erasedups:ignorespace
 HISTSIZE=5000
 HISTFILESIZE=10000
@@ -23,7 +17,7 @@ HISTFILESIZE=10000
 # Ensure command history is updated and synchronized across multiple sessions
 PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
 
-# Do not overwrite the history file upon exit of terminal session
+# Do not overwrite the history file
 shopt -s histappend
 
 # --- Optional shell features ---
@@ -41,23 +35,22 @@ shopt -s cmdhist
 shopt -s checkjobs
 
 # --- Aliases ---
-alias ls='eza --group-directories-first --git'
-alias ll='ls -alF'
-alias la='ls -A'
-alias lt='eza --tree --level=2 --long --git'
-alias l='ls -F'
-alias grep='grep --color=auto'
+alias ls="ls -X --group-directories-first --color=auto"
+alias ll="ls -AlF"
+alias la="ls -A"
+alias l="ls -CF"
+alias grep="grep --color=auto"
 
-# Move to the parent folder.
-alias ..='cd ..;pwd'
-# Move up two parent folders.
-alias ...='cd ../..;pwd'
-# Move up three parent folders.
-alias ....='cd ../../..;pwd'
-# Press c to clear the terminal screen.
-alias c='clear'
-# Press h to view the bash history.
-alias h='history'
+# Move up one parent folder
+alias ..="cd ..;pwd"
+# Move up two parent folders
+alias ...="cd ../..;pwd"
+# Move up three parent folders
+alias ....="cd ../../..;pwd"
+# View bash history
+alias h="history"
+# Clear terminal
+alias c="clear"
 
 # --- Shell integration ---
 osc7_cwd() {
@@ -78,41 +71,49 @@ PROMPT_COMMAND=${PROMPT_COMMAND:+${PROMPT_COMMAND%;}; }osc7_cwd
 
 # --- Yazi setup ---
 function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd <"$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
 }
 
-# --- fzf environment variables ---
+# --- Fzf commands ---
+# Default options
+export FZF_DEFAULT_OPTS="--height 100% --layout=default --style=minimal --border"
+
 # CTRL-Y to copy the command into clipboard using wl-copy
 export FZF_CTRL_R_OPTS="
     --bind 'ctrl-y:execute-silent(echo -n {2..} | wl-copy)+abort'
     --color header:italic
-    --header 'Press CTRL-Y to copy command into clipboard'
-    --height=50%"
+    --header 'Press CTRL-Y to copy command into clipboard'"
 
 # Preview file content using bat (https://github.com/sharkdp/bat)
 export FZF_CTRL_T_OPTS="
     --walker-skip .git,node_modules,target
     --preview 'bat -n --color=always {}'
-    --bind 'ctrl-/:change-preview-window(down|hidden|)'
-    --height=50%"
+    --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # Print tree structure in the preview window
 export FZF_ALT_C_OPTS="
     --walker-skip .git,node_modules,target
-    --preview 'eza --tree --color=always {}'
-    --height=50%"
+    --preview 'tree {}'"
 
-# Rosé Pine fzf theme
-export FZF_DEFAULT_OPTS="
-	--color=fg:#908caa,bg:#191724,hl:#ebbcba
-	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
-	--color=border:#403d52,header:#31748f,gutter:#191724
-	--color=spinner:#f6c177,info:#9ccfd8
-	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+# Fzf search man pages
+alias mansearch='
+man_page=$(apropos . | sed "s/ .*//" | sort -u | fzf --preview="man {1} 2>/dev/null" --preview-window=up:60%:wrap | awk "{print \$1}")
+  if [ -n "$man_page" ]; then
+    man "$man_page" 2>/dev/null | bat -l man -p
+  fi
+'
+
+# fzf search Archlinux repository
+alias pacman-i="sudo pacman -S \$(pacman -Sl | awk '{print \$2}' | fzf -m --preview='pacman -Si {}' --preview-window=up:60%:wrap)"
+alias pacman-r="sudo pacman -Rns \$(pacman -Q | awk '{print \$1}' | fzf -m --preview='pacman -Qi {}' --preview-window=up:60%:wrap)"
+
+# fzf search Archlinux user repository
+alias paru-i="paru -S \$(paru -Sl | awk '{print \$2}' | fzf -m --preview='paru -Si {}' --preview-window=up:60%:wrap)"
+alias paru-r="paru -Rns \$(paru -Q | awk '{print \$1}' | fzf -m --preview='paru -Qi {}' --preview-window=up:60%:wrap)"
 
 # --- Git integration ---
 if [[ -f /usr/share/git/completion/git-completion.bash ]]; then
@@ -123,19 +124,19 @@ if [[ -f /usr/share/git/completion/git-prompt.sh ]]; then
 fi
 
 # --- Bash prompt ---
-export PS1="\n\t \[\033[35m\]\w\[\033[32m\]\$(GIT_PS1_SHOWUNTRACKEDFILES=1 GIT_PS1_SHOWDIRTYSTATE=1 __git_ps1)\[\033[00m\]\n$ "
+export PS1="\n\t \[\033[35m\]\w\[\033[34m\]\$(GIT_PS1_SHOWUNTRACKEDFILES=1 GIT_PS1_SHOWDIRTYSTATE=1 __git_ps1)\[\033[00m\]\n$ "
 
 # --- Bash completion ---
-if [[ -r /usr/share/bash-completion/bash_completion ]]; then
+if [[ -f /usr/share/bash-completion/bash_completion ]]; then
     source /usr/share/bash-completion/bash_completion
 fi
 
 # --- Execute shell commands ---
-if command -v fzf &> /dev/null; then
+if command -v fzf &>/dev/null; then
     # Set fzf key-bindings and completion
     eval "$(fzf --bash)"
 fi
-if command -v zoxide &> /dev/null; then
+if command -v zoxide &>/dev/null; then
     # Set zoxide
     eval "$(zoxide init bash)"
 fi
