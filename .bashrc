@@ -54,33 +54,33 @@ alias c="clear"
 
 # --- Shell integration ---
 osc7_cwd() {
-    local strlen=${#PWD}
-    local encoded=""
-    local pos c o
-    for (( pos=0; pos<strlen; pos++ )); do
-        c=${PWD:$pos:1}
-        case "$c" in
-            [-/:_.!\'\(\)~[:alnum:]] ) o="${c}" ;;
-            * ) printf -v o '%%%02X' "'${c}" ;;
-        esac
-        encoded+="${o}"
-    done
-    printf '\e]7;file://%s%s\e\\' "${HOSTNAME}" "${encoded}"
+  local strlen=${#PWD}
+  local encoded=""
+  local pos c o
+  for ((pos = 0; pos < strlen; pos++)); do
+    c=${PWD:$pos:1}
+    case "$c" in
+    [-/:_.!\'\(\)~[:alnum:]]) o="${c}" ;;
+    *) printf -v o '%%%02X' "'${c}" ;;
+    esac
+    encoded+="${o}"
+  done
+  printf '\e]7;file://%s%s\e\\' "${HOSTNAME}" "${encoded}"
 }
 PROMPT_COMMAND=${PROMPT_COMMAND:+${PROMPT_COMMAND%;}; }osc7_cwd
 
 # --- Yazi setup ---
 function y() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-    yazi "$@" --cwd-file="$tmp"
-    IFS= read -r -d '' cwd <"$tmp"
-    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-    rm -f -- "$tmp"
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd <"$tmp"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
 }
 
 # --- Fzf commands ---
 # Default options
-export FZF_DEFAULT_OPTS="--height 100% --layout=default --style=minimal --border"
+export FZF_DEFAULT_OPTS='--height 100% --layout=reverse --style=default --border'
 
 # CTRL-Y to copy the command into clipboard using wl-copy
 export FZF_CTRL_R_OPTS="
@@ -99,44 +99,104 @@ export FZF_ALT_C_OPTS="
     --walker-skip .git,node_modules,target
     --preview 'tree {}'"
 
-# Fzf search man pages
-alias mansearch='
-man_page=$(apropos . | sed "s/ .*//" | sort -u | fzf --preview="man {1} 2>/dev/null" --preview-window=up:60%:wrap | awk "{print \$1}")
+# Search man pages database
+mansearch() {
+  local man_page
+  man_page=$(apropos . | sed -n 's/^\(.*)\).*/\1/p' |
+    sort -u | fzf | awk "{print \$1}")
+
   if [ -n "$man_page" ]; then
     man "$man_page" 2>/dev/null | bat -l man -p
   fi
-'
+}
 
-# fzf search Archlinux repository
-alias pacman-i="sudo pacman -S \$(pacman -Sl | awk '{print \$2}' | fzf -m --preview='pacman -Si {}' --preview-window=up:60%:wrap)"
-alias pacman-r="sudo pacman -Rns \$(pacman -Q | awk '{print \$1}' | fzf -m --preview='pacman -Qi {}' --preview-window=up:60%:wrap)"
+# Query zoxide
+zf() {
+  local Fzf
+  Fzf=$(zoxide query --list | fzf -m --preview='ls -AFC \
+  --group-directories-first \
+  --color=always {}' \
+    --preview-window=down:30%:wrap)
 
-# fzf search Archlinux user repository
-alias paru-i="paru -S \$(paru -Sl | awk '{print \$2}' | fzf -m --preview='paru -Si {}' --preview-window=up:60%:wrap)"
-alias paru-r="paru -Rns \$(paru -Q | awk '{print \$1}' | fzf -m --preview='paru -Qi {}' --preview-window=up:60%:wrap)"
+  if [ -n "$Fzf" ]; then
+    z "$Fzf"
+  fi
+}
+
+# Install packages from the Archlinux official repository
+pac_i() {
+  local selected
+  mapfile -t selected < <(pacman -Slq |
+    fzf -m --preview='pacman -Si {}' \
+      --preview-window=down:60%:wrap)
+  # remove empty/null values
+  if ((${#selected[@]} > 0)); then
+    sudo pacman -Syu "${selected[@]}"
+  fi
+}
+
+# Remove packages from the system
+pac_r() {
+  local selected
+  mapfile -t selected < <(pacman -Qq |
+    fzf -m --preview='pacman -Qi {}' \
+      --preview-window=down:60%:wrap)
+  # remove empty/null values
+  if ((${#selected[@]} > 0)); then
+    sudo pacman -Rns "${selected[@]}"
+  fi
+}
+
+# Query the Archlinux files database
+pac_f() {
+  local selected
+  selected=$(pacman -Slq |
+    fzf -m --preview='cat <(pacman -Si {1}) <(pacman -Fl {1} | \
+  awk "{print \$2}")' \
+      --preview-window=down:60%:wrap)
+  if [ -n "$selected" ]; then
+    pacman -Si "$selected" | bat --style=grid
+  fi
+}
+
+# Install packages from the Archlinux user repository
+paru_i() {
+  local selected
+  mapfile -t selected < <(paru -Slq |
+    fzf -m --preview='paru -Si {}' \
+      --preview-window=down:60%:wrap)
+  # remove empty/null values
+  if (("${#selected[@]}" > 0)); then
+    paru -S "${selected[@]}"
+  fi
+}
+
+# --- Defualt bash prompt ---
+export PS1="\n\t \[\033[35m\]\w\[\033[34m\]\$(GIT_PS1_SHOWUNTRACKEDFILES=1 GIT_PS1_SHOWDIRTYSTATE=1 __git_ps1)\[\033[00m\]\n$ "
 
 # --- Git integration ---
 if [[ -f /usr/share/git/completion/git-completion.bash ]]; then
-    source /usr/share/git/completion/git-completion.bash
+  source /usr/share/git/completion/git-completion.bash
 fi
 if [[ -f /usr/share/git/completion/git-prompt.sh ]]; then
-    source /usr/share/git/completion/git-prompt.sh
+  source /usr/share/git/completion/git-prompt.sh
 fi
-
-# --- Bash prompt ---
-export PS1="\n\t \[\033[35m\]\w\[\033[34m\]\$(GIT_PS1_SHOWUNTRACKEDFILES=1 GIT_PS1_SHOWDIRTYSTATE=1 __git_ps1)\[\033[00m\]\n$ "
 
 # --- Bash completion ---
 if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-    source /usr/share/bash-completion/bash_completion
+  source /usr/share/bash-completion/bash_completion
 fi
 
 # --- Execute shell commands ---
+# Fzf
 if command -v fzf &>/dev/null; then
-    # Set fzf key-bindings and completion
-    eval "$(fzf --bash)"
+  eval "$(fzf --bash)"
 fi
+# Zoxide
 if command -v zoxide &>/dev/null; then
-    # Set zoxide
-    eval "$(zoxide init bash)"
+  eval "$(zoxide init bash)"
+fi
+# Starship
+if command -v starship &>/dev/null; then
+  eval "$(starship init bash)"
 fi
