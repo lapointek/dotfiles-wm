@@ -11,8 +11,18 @@ bind -f ~/.inputrc
 # --- History options ---
 HISTTIMEFORMAT="%y-%m-%d %H:%M "
 HISTCONTROL=ignoredups:erasedups:ignorespace
-HISTSIZE=5000
+HISTSIZE=10000
 HISTFILESIZE=10000
+
+# User environment variables
+# Editors
+export EDITOR=nvim
+export SUDO_EDITOR=nvim
+export VISUAL=nvim
+# Pager
+export LESS="-RFMX --mouse --wheel-lines=3"
+# Bat theme
+export BAT_THEME=ansi
 
 # Ensure command history is updated and synchronized across multiple sessions
 PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
@@ -80,7 +90,16 @@ function y() {
 
 # --- Fzf commands ---
 # Default options
-export FZF_DEFAULT_OPTS='--height 100% --layout=reverse --style=default --border'
+export FZF_DEFAULT_OPTS="
+  --height 100% \
+  --layout=reverse \
+  --border \
+  --color=fg:#908caa,bg:#191724,hl:#ebbcba
+  --color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
+  --color=border:#403d52,header:#31748f,gutter:#191724
+  --color=spinner:#f6c177,info:#9ccfd8
+  --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa
+  "
 
 # CTRL-Y to copy the command into clipboard using wl-copy
 export FZF_CTRL_R_OPTS="
@@ -100,26 +119,13 @@ export FZF_ALT_C_OPTS="
     --preview 'tree {}'"
 
 # Search man pages database
-mansearch() {
+man_s() {
   local man_page
   man_page=$(apropos . | sed -n 's/^\(.*)\).*/\1/p' |
     sort -u | fzf | awk "{print \$1}")
 
   if [ -n "$man_page" ]; then
     man "$man_page" 2>/dev/null | bat -l man -p
-  fi
-}
-
-# Query zoxide
-zf() {
-  local Fzf
-  Fzf=$(zoxide query --list | fzf -m --preview='ls -AFC \
-  --group-directories-first \
-  --color=always {}' \
-    --preview-window=down:30%:wrap)
-
-  if [ -n "$Fzf" ]; then
-    z "$Fzf"
   fi
 }
 
@@ -147,18 +153,6 @@ pac_r() {
   fi
 }
 
-# Query the Archlinux files database
-pac_f() {
-  local selected
-  selected=$(pacman -Slq |
-    fzf -m --preview='cat <(pacman -Si {1}) <(pacman -Fl {1} | \
-  awk "{print \$2}")' \
-      --preview-window=down:60%:wrap)
-  if [ -n "$selected" ]; then
-    pacman -Si "$selected" | bat --style=grid
-  fi
-}
-
 # Install packages from the Archlinux user repository
 paru_i() {
   local selected
@@ -172,7 +166,8 @@ paru_i() {
 }
 
 # --- Defualt bash prompt ---
-export PS1="\n\t \[\033[35m\]\w\[\033[34m\]\$(GIT_PS1_SHOWUNTRACKEDFILES=1 GIT_PS1_SHOWDIRTYSTATE=1 __git_ps1)\[\033[00m\]\n$ "
+export PS1="\n\t \[\033[32m\]\w\[\033[36m\]\$(GIT_PS1_SHOWUNTRACKEDFILES=1 \
+  GIT_PS1_SHOWDIRTYSTATE=1 __git_ps1)\[\033[00m\]\n$ "
 
 # --- Git integration ---
 if [[ -f /usr/share/git/completion/git-completion.bash ]]; then
@@ -195,8 +190,4 @@ fi
 # Zoxide
 if command -v zoxide &>/dev/null; then
   eval "$(zoxide init bash)"
-fi
-# Starship
-if command -v starship &>/dev/null; then
-  eval "$(starship init bash)"
 fi

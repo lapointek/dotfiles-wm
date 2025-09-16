@@ -30,6 +30,16 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' max-matches 50
 zstyle ':completion:*' menu select
 
+# User environment variables
+# Editors
+export EDITOR=nvim
+export SUDO_EDITOR=nvim
+export VISUAL=nvim
+# Pager
+export LESS="-RFMX --mouse --wheel-lines=3"
+# Bat theme
+export BAT_THEME=ansi
+
 # --- Zsh key-bindings ---
 bindkey -e
 bindkey '^k' up-line-or-search
@@ -149,26 +159,13 @@ export FZF_ALT_C_OPTS="
   --preview 'tree {}'"
 
 # Search man pages database
-mansearch() {
+man_s() {
   local man_page
   man_page=$(apropos . | sed -n 's/^\(.*)\).*/\1/p' | \
   sort -u | fzf | awk "{print \$1}")
 
   if [ -n "$man_page" ]; then
     man "$man_page"
-  fi
-}
-
-# Query zoxide
-zf() {
-  local Fzf
-  Fzf=$(zoxide query --list | fzf --preview='ls -AFC \
-  --group-directories-first \
-  --color=always {}' \
-  --preview-window=down:30%:wrap)
-
-  if [ -n "$Fzf" ]; then
-    z "$Fzf"
   fi
 }
 
@@ -198,18 +195,6 @@ pac_r() {
   fi
 }
 
-# Query the Archlinux files database
-pac_f() {
-  local selected
-  selected=$(pacman -Slq | \
-  fzf -m --preview='cat <(pacman -Si {1}) <(pacman -Fl {1} | \
-  awk "{print \$2}")' \
-  --preview-window=down:60%:wrap)
-  if [ -n "$selected" ]; then
-    pacman -Si "$selected"
-  fi
-}
-
 # Install packages from the Archlinux user repository
 paru_i() {
   local selected
@@ -223,17 +208,68 @@ paru_i() {
   fi
 }
 
-# --- Default zsh prompt ---
+# --- Zsh prompt ---
 autoload -Uz vcs_info
+# Enable vcs_info
 precmd() { vcs_info }
+# Zstyle git settings
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' unstagedstr '!'
 zstyle ':vcs_info:git:*' stagedstr '+'
-zstyle ':vcs_info:git:*' untrackedstr '?'
-zstyle ':vcs_info:git:*' formats "%F{242}%b%F{magenta}%m%F{red}%u%F{cyan}%c%F%f"
+zstyle ':vcs_info:git:*' formats '%F{cyan}%b%f%F{red}%u%f%F{cyan}%c%f %F{green}%m%f'
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+zstyle ':vcs_info:git*+set-message:*' hooks git-remotebranch
+zstyle ':vcs_info:git*+set-message:*' hooks git-st
+# Enable prompt substitution
 setopt prompt_subst
-RPROMPT='%F{245}%*%f'
-PROMPT=$'%F{blue}${PWD/#$HOME/~}%f ${vcs_info_msg_0_}\n%F{magenta}❯%f '
+# Prompt
+PROMPT=$'%D{%H:%M:%S} %F{magenta}${PWD/#$HOME/~}%f ${vcs_info_msg_0_}\n$ '
+
+# Show untracked
++vi-git-untracked(){
+    if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+        git status --porcelain | grep -q '^?? ' 2> /dev/null ; then
+        hook_com[staged]+='?'
+    fi
+}
+
+# Show ahead and behind
+function +vi-git-st() {
+    local ahead behind
+    local -a gitstatus
+
+    # Exit early in case the worktree is on a detached HEAD
+    git rev-parse ${hook_com[branch]}@{upstream} >/dev/null 2>&1 || return 0
+
+    local -a ahead_and_behind=(
+        $(git rev-list --left-right --count HEAD...${hook_com[branch]}@{upstream} 2>/dev/null)
+    )
+
+    ahead=${ahead_and_behind[1]}
+    behind=${ahead_and_behind[2]}
+
+    (( $ahead )) && gitstatus+=( "↑${ahead}" )
+    (( $behind )) && gitstatus+=( "↓${behind}" )
+
+    hook_com[misc]+=${(j:/:)gitstatus}
+}
+
+# Show remote branch name
+function +vi-git-remotebranch() {
+    local remote
+
+    # Are we on a remote-tracking branch?
+    remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
+        --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
+
+    # The first test will show a tracking branch whenever there is one. The
+    # second test, however, will only show the remote branch's name if it
+    # differs from the local one.
+    if [[ -n ${remote} ]] ; then
+    #if [[ -n ${remote} && ${remote#*/} != ${hook_com[branch]} ]] ; then
+        hook_com[branch]="${hook_com[branch]} [${remote}]"
+    fi
+}
 
 # --- Execute shell commands ---
 # Fzf
@@ -245,8 +281,4 @@ fi
 if command -v zoxide &>/dev/null; then
   # Set zoxide
   eval "$(zoxide init zsh)"
-fi
-# Starship
-if command -v starship &>/dev/null; then
-  eval "$(starship init zsh)"
 fi
