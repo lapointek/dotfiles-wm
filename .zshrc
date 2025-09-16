@@ -30,7 +30,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' max-matches 50
 zstyle ':completion:*' menu select
 
-# User environment variables
+# --- User environment variables ---
 # Editors
 export EDITOR=nvim
 export SUDO_EDITOR=nvim
@@ -103,21 +103,16 @@ alias h='history -E'
 alias c='clear'
 
 # --- Shell integration ---
-osc7_cwd() {
-    local strlen=${#PWD}
-    local encoded=""
-    local pos c o
-    for (( pos=0; pos<strlen; pos++ )); do
-        c=${PWD:$pos:1}
-        case "$c" in
-            [-/:_.!\'\(\)~[:alnum:]] ) o="${c}" ;;
-            * ) printf -v o '%%%02X' "'${c}" ;;
-        esac
-        encoded+="${o}"
-    done
-    printf '\e]7;file://%s%s\e\\' "${HOSTNAME}" "${encoded}"
+function osc7-pwd() {
+    emulate -L zsh # also sets localoptions for us
+    setopt extendedglob
+    local LC_ALL=C
+    printf '\e]7;file://%s%s\e\' $HOST ${PWD//(#m)([^@-Za-z&-;_~])/%${(l:2::0:)$(([##16]#MATCH))}}
 }
-PROMPT_COMMAND=${PROMPT_COMMAND:+${PROMPT_COMMAND%;}; }osc7_cwd
+function chpwd-osc7-pwd() {
+    (( ZSH_SUBSHELL )) || osc7-pwd
+}
+add-zsh-hook -Uz chpwd chpwd-osc7-pwd
 
 # --- Yazi setup ---
 function y() {
@@ -166,6 +161,17 @@ man_s() {
 
   if [ -n "$man_page" ]; then
     man "$man_page"
+  fi
+}
+
+# Search tldr pages database
+tldr_s() {
+  local tldr_page
+  tldr_page=$(apropos . | sed -n 's/^\(.*)\).*/\1/p' | \
+  sort -u | fzf | awk "{print \$1}")
+
+  if [ -n "$tldr_page" ]; then
+    tldr "$tldr_page"
   fi
 }
 

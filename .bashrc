@@ -14,7 +14,7 @@ HISTCONTROL=ignoredups:erasedups:ignorespace
 HISTSIZE=10000
 HISTFILESIZE=10000
 
-# User environment variables
+# --- User environment variables ---
 # Editors
 export EDITOR=nvim
 export SUDO_EDITOR=nvim
@@ -126,6 +126,17 @@ man_s() {
 
   if [ -n "$man_page" ]; then
     man "$man_page" 2>/dev/null | bat -l man -p
+  fi
+}
+
+# Search tldr pages database
+tldr_s() {
+  local tldr_page
+  tldr_page=$(apropos . | sed -n 's/^\(.*)\).*/\1/p' |
+    sort -u | fzf | awk "{print \$1}")
+
+  if [ -n "$tldr_page" ]; then
+    tldr "$tldr_page"
   fi
 }
 
