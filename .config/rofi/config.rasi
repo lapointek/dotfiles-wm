@@ -1,0 +1,60 @@
+* {
+    bg: #000000;
+    selected: #718096;
+    text: #E0E0E0;
+    font: "JetBrainsMono Nerd Font regular 16";
+}
+
+window {
+    background-color: @bg;
+    border: 2px;
+    border-color: @selected;
+    width: 40%;
+}
+
+mainbox {
+    background-color: @bg;
+    padding: 10px;
+}
+
+inputbar {
+    background-color: @bg;
+    text-color: @text;
+    padding: 8px;
+}
+
+listview {
+    background-color: @bg;
+    scrollbar: false;
+    spacing: 5px;
+}
+
+element {
+    background-color: transparent;
+}
+
+element {
+    background-color: transparent;
+    text-color: @text;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color: @text;
+}
+
+element normal normal,
+element alternate normal,
+element normal active,
+element alternate active {
+    text-color: @text;
+    background-color: transparent;
+}
+
+entry {
+    text-color: @text;
+}
+
+prompt {
+    text-color: @selected;
+}

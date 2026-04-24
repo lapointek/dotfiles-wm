@@ -1,0 +1,14 @@
+# Set inner/outer gaps
+default_border pixel 2
+default_floating_border pixel 2
+
+# Default font
+font pango:Noto Sans Bold 13
+
+# class        border    bg         text      indicator child_border
+client.focused #718096 #404552 #e0e0e0 #718096 #718096
+
+# Status Bar
+bar {
+    swaybar_command waybar
+}

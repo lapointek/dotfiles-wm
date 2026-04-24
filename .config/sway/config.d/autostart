@@ -1,0 +1,50 @@
+# Environment variable
+exec_always dbus-update-activation-environment --systemd \
+WAYLAND_DISPLAY \
+XDG_CURRENT_DESKTOP=sway \
+XDG_SESSION_TYPE=wayland \
+XDG_SESSION_DESKTOP=sway \
+ELECTRON_OZONE_PLATFORM_HINT=wayland
+
+# Start notification daemon
+exec dunst
+
+# Start applets
+exec blueman-applet
+exec nm-applet
+
+# Start gnome keyring daemon
+exec --no-startup-id gnome-keyring-daemon --start --components=secrets
+
+# Polkit authentication
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# Set wallpaper
+set $wallpaper /$HOME/Pictures/wallpapers/art/wallhaven-vq75j8.jpg
+output * bg $wallpaper fill
+
+# Cliphist
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
+
+# Idle configuration
+exec swayidle -w \
+        timeout 300 'swaylock -f -C ~/.config/sway/swaylock/config'
+        # timeout 500 'swaymsg "output * power off"' \
+        # timeout 1800 'systemctl suspend' \
+        # resume 'swaymsg "output * power on"' \
+        # before-sleep 'playerctl pause; swaylock -f -C ~/.config/sway/swaylock/config'
+
+set $cursor_theme Adwaita
+set $cursor_size 32
+
+# Sway native + many Wayland apps
+seat seat0 xcursor_theme $cursor_theme $cursor_size
+
+# GTK apps (including some Flatpaks and Waybar)
+exec_always {
+    gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme
+    gsettings set org.gnome.desktop.interface cursor-size $cursor_size
+    gsettings set org.gnome.desktop.interface gtk-theme "Orchis-Dark"
+    gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
+}

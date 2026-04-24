@@ -1,0 +1,7 @@
+# Applications
+for_window [app_id="foot" title="htop"] floating enable, resize set 1800 1300
+for_window [app_id="foot" title="yazi-floating"] floating enable, resize set 1800 1300
+
+# Inhibit idle
+for_window [class=".*"] inhibit_idle fullscreen
+for_window [app_id=".*"] inhibit_idle fullscreen
