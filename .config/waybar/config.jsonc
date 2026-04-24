@@ -9,6 +9,7 @@
   "modules-right": [
     "tray",
     "sway/scratchpad",
+    "custom/updates",
     "network",
     "cpu",
     "memory",
@@ -59,6 +60,12 @@
     "tooltip": true,
     "tooltip-format": "{app}: {title}",
     "on-click": "swaymsg scratchpad show"
+  },
+
+  "custom/updates": {
+    "format": "upd:{} ",
+    "exec": "dnf check-update --quiet | wc -l",
+    "interval": 3600
   },
 
   "network": {

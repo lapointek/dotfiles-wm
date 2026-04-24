@@ -51,7 +51,7 @@ alias la="ls -A"
 alias l="ls -CF"
 alias grep="grep --color=auto"
 alias enter="toolbox enter"
-alias n="nnn -HU"
+alias r="ranger"
 
 # Move up one parent folder
 alias ..="cd ..;pwd"

@@ -45,6 +45,6 @@ seat seat0 xcursor_theme $cursor_theme $cursor_size
 exec_always {
     gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme
     gsettings set org.gnome.desktop.interface cursor-size $cursor_size
-    gsettings set org.gnome.desktop.interface gtk-theme "Orchis-Dark"
+    gsettings set org.gnome.desktop.interface gtk-theme "Arc-Darkest"
     gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 }

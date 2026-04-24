@@ -33,7 +33,7 @@ bindsym $mod+Escape exec $powermenu
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
 # Start Swaylock
-bindsym $mod+f1 exec swaylock -C ~/.config/sway/swaylock/config
+bindsym Ctrl+Alt+l exec swaylock -C ~/.config/sway/swaylock/config
 
 ##################
 #  Focus Change  #
