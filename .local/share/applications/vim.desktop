@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Vim
+Comment=Hyperextensible text editor
+Exec=foot -e vim %F
+Icon=vim
+Terminal=false
+Type=Application
+Categories=Utility;TextEditor;
+StartupNotify=true
+MimeType=text/plain;

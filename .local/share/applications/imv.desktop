@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=imv Image Viewer
+Comment=Fast image viewer for X11/Wayland
+Exec=imv %F
+Icon=imv
+Terminal=false
+Type=Application
+Categories=Graphics;Viewer;RasterGraphics;
+MimeType=image/png;image/jpeg;image/gif;image/webp;image/bmp;image/tiff;
+StartupNotify=false

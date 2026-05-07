@@ -1,0 +1,6 @@
+^/install.*
+^/README.*
+\.git
+^/a.*
+^/Default.code-profile
+^/scripts
