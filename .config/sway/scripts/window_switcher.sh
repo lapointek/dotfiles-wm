@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # Define the lengths for each column
 ws_length=2
@@ -22,7 +22,7 @@ formatted_output=$(swaymsg -t get_tree | jq -r --arg ws_length "$ws_length" --ar
 ')
 
 # Launch rofi with the formatted output
-row=$(echo "$formatted_output" | rofi -show window --width=80 --lines=12)
+row=$(echo "$formatted_output" | rofi -dmenu --width=80 --lines=12)
 
 # Get the container ID from the selection and focus the container
 if [ -n "$row" ]; then

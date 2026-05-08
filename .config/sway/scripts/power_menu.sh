@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 SELECTION="$(printf "Lock\nSuspend\nLog out\nReboot\nReboot to UEFI\nShutdown" | rofi -dmenu -i center -l 6 -w 35 -p "Select an option ")"
 
