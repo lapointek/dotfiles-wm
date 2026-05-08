@@ -1,6 +1,6 @@
-# Fedora Sway Dotfiles
+# Sway Dotfiles
 
-Personal dotfiles for my Fedora Sway setup.
+Personal dotfiles for my Sway setup.
 
 ## Installation
 
