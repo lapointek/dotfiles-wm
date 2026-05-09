@@ -9,6 +9,7 @@
   "modules-right": [
     "tray",
     "sway/scratchpad",
+    "custom/updates",
     "cpu",
     "memory",
     "pulseaudio",
@@ -49,6 +50,12 @@
         "weekdays": "<span color='#9ccfd8'><b>{}</b></span>"
       }
     }
+  },
+
+  "custom/updates": {
+    "exec": "dnf5 check-upgrade 2>/dev/null | grep -cE '^[a-zA-Z0-9._+-]+\\.'",
+    "interval": 3600,
+    "format": " upd:{}  "
   },
 
   "sway/scratchpad": {

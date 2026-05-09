@@ -29,7 +29,7 @@
 
 #workspaces button.urgent {
   background-color: #eb6f92;
-  color: #000000;
+  color: #e0e0e0;
 }
 
 #clock,
@@ -40,6 +40,7 @@
 #bluetooth,
 #cpu,
 #scratchpad,
+#updates,
 #tray,
 #memory {
   padding: 0px 10px;
