@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
-SELECTION="$(printf "Lock\nSuspend\nLog out\nReboot\nReboot to UEFI\nShutdown" | rofi -dmenu -i center -l 6 -w 35 -p "Select an option ")"
+SELECTION="$(printf "Lock\nSuspend\nLog out\nReboot\nReboot to UEFI\nShutdown" | rofi -dmenu -i center -no-show-icons -l 6 -w 35 -p "Select an option ")"
 
 confirm_action() {
     local action="$1"
-    CONFIRMATION="$(printf "No\nYes" | rofi -dmenu -i center -l 2 -w 18 -p "$action? ")"
+    CONFIRMATION="$(printf "No\nYes" | rofi -dmenu -i -center -l 2 -w 18 -p "$action?" )"
     [[ "$CONFIRMATION" == *"Yes"* ]]
 }
 
