@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Neovim
 Comment=Edit text files with Neovim in Foot terminal
-Exec=foot -e sh -c 'exec nvim "$@"' sh %F
+Exec=foot -e nvim %F
 Icon=nvim
 Terminal=false
 Type=Application

@@ -15,6 +15,11 @@
 
     background = "#000000"
     foreground = "#e0e0e0"
+    icon_theme = Numix-Circle
+    enable_recursive_icon_lookup = true
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 64
 
 [urgency_low]
     background = "#000000"
