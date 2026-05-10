@@ -2,7 +2,7 @@
 Name=imv Image Viewer
 Comment=Fast image viewer for X11/Wayland
 Exec=imv %F
-Icon=image
+Icon=image-viewer
 Terminal=false
 Type=Application
 Categories=Graphics;Viewer;RasterGraphics;
