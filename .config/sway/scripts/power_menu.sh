@@ -4,7 +4,7 @@ SELECTION="$(printf "Lock\nSuspend\nLog out\nReboot\nReboot to UEFI\nShutdown" |
 
 confirm_action() {
     local action="$1"
-    CONFIRMATION="$(printf "No\nYes" | rofi -dmenu -i -center -l 2 -w 18 -p "$action?" )"
+    CONFIRMATION="$(printf "No\nYes" | rofi -dmenu -i -center -no-show-icons -l 2 -w 18 -p "$action?" )"
     [[ "$CONFIRMATION" == *"Yes"* ]]
 }
 

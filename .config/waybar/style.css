@@ -14,7 +14,7 @@
 
 #workspaces button {
   padding: 0px 5px;
-  min-width: 15px;
+  min-width: 8px;
   color: #e0e0e0;
 }
 
@@ -43,7 +43,7 @@
 #updates,
 #tray,
 #memory {
-  padding: 0px 10px;
+  padding: 0px 8px;
   color: #e0e0e0;
 }
 
