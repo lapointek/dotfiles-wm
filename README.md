@@ -7,6 +7,7 @@ Personal dotfiles for my system.
 ### Requirements
 
 ```
+- Sway installation
 - GNU Stow
 - Git
 ```
