@@ -1,6 +1,6 @@
-# Sway Dotfiles
+# Dotfiles
 
-Personal dotfiles for my Sway setup.
+Personal dotfiles for my system.
 
 ## Installation
 
@@ -25,11 +25,11 @@ cd dotfiles
 stow .
 ```
 
-# Fedora Sway Only
+# Fedora Only
 
 ## Development Environment Setup
 
-The script automates the setup of my personal development environment on Fedora Linux. It installs development tools and desktop applications.
+The script automates package installation for my development environment on Fedora Linux. It installs development tools and desktop applications.
 
 ## Features
 
@@ -41,7 +41,7 @@ The script automates the setup of my personal development environment on Fedora 
 
 ### Requirements
 
-    - Fedora Linux Sway installation
+    - Fedora Linux installation
 
 1. Run the install script.
 
