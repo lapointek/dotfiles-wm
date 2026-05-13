@@ -18,7 +18,7 @@
     icon_theme = Numix-Circle
     enable_recursive_icon_lookup = true
     icon_position = left
-    min_icon_size = 32
+    min_icon_size = 48
     max_icon_size = 64
 
 [urgency_low]
