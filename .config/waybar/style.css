@@ -1,65 +1,90 @@
 * {
-  padding: 0px;
-  margin: 0px;
-  border: none;
-  border-radius: 0px;
-}
-
-#waybar {
   font-family: "Noto Sans";
   font-size: 17px;
-  font-weight: bold;
-  background-color: #000000;
+  min-height: 0;
+  border-radius: 0;
+  border: none;
 }
 
-#workspaces button {
-  padding: 0px 5px;
-  min-width: 8px;
-  color: #e0e0e0;
-}
-
-#workspaces button.empty {
-  color: #404552;
-}
-
-#workspaces button.focused {
-  color: #e0e0e0;
-  background-color: #718096;
-}
-
-#workspaces button.urgent {
-  background-color: #eb6f92;
-  color: #e0e0e0;
-}
-
-#clock,
-#battery,
-#pulseaudio,
-#backlight,
-#window,
-#bluetooth,
-#cpu,
-#scratchpad,
-#updates,
-#tray,
-#memory {
-  padding: 0px 8px;
-  color: #e0e0e0;
-}
-
-#pulseaudio.muted {
-  color: #404552;
-}
-
-#battery.critical {
-  color: #eb6f92;
+window#waybar {
+  background: rgb(0, 0, 0);
 }
 
 tooltip {
-  background: black;
+  background: #000000;
   border: 2px solid #718096;
 }
 
 tooltip label {
-  color: #e0e0e0;
+  color: white;
+}
+
+#workspaces button {
+  padding: 0 3px;
+  color: white;
+}
+
+#workspaces button.focused {
+  background-color: #718096;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#tray,
+#idle_inhibitor,
+#scratchpad {
+  margin: 2px;
+  padding: 0px 5px;
+  color: white;
+}
+
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+  margin-right: 0;
+}
+
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
+
+#battery.warning:not(.charging) {
+  background-color: #f53c3c;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.critical:not(.charging) {
+  background-color: #f53c3c;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#network.disconnected {
+  background-color: #f53c3c;
+}
+
+#temperature.critical {
+  background-color: #eb4d4b;
 }
