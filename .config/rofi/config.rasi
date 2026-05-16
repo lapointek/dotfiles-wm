@@ -1,8 +1,8 @@
 * {
     bg: #000000;
     selected: #718096;
-    text: #E0E0E0;
-    font: "Noto Sans 16";
+    text: white;
+    font: "Noto Sans Mono 16";
 }
 
 window {
