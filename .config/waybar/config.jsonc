@@ -8,6 +8,7 @@
     // Choose the order of the modules
     "modules-left": [
         "sway/workspaces",
+        "sway/mode",
         "sway/scratchpad",
         "sway/window"
     ],
@@ -48,6 +49,9 @@
         "format-icons": ["", ""],
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -123,5 +127,5 @@
         "format-source": "mic:{volume}%",
         "format-source-muted": "mic:muted"
     }
-    }
+  }
 }
