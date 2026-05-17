@@ -1,5 +1,5 @@
 * {
-  font-family: "Noto Sans Mono";
+  font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace;
   font-size: 17px;
   min-height: 0;
   border-radius: 0;
@@ -39,11 +39,12 @@ tooltip label {
 #pulseaudio,
 #wireplumber,
 #tray,
+#mode,
 #idle_inhibitor,
 #scratchpad {
-  margin: 2px;
   padding: 0px 5px;
   color: white;
+  margin: 2px;
 }
 
 #mode {

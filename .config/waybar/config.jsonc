@@ -2,7 +2,7 @@
 {
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 28, // Waybar height (to be removed for auto height)
+    "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
@@ -43,15 +43,24 @@
     //         "default": ""
     //     }
     // },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
     "sway/scratchpad": {
         "format": "{icon} {count}",
         "show-empty": false,
         "format-icons": ["", ""],
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
-    },
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -61,8 +70,12 @@
         }
     },
     "tray": {
-        "icon-size": 22,
-        "spacing": 10
+        "icon-size": 21,
+        "spacing": 10,
+        // "icons": {
+        //   "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        // }
     },
     "clock": {
     "format": "{:%d %b %I:%M %p}",
@@ -72,58 +85,73 @@
         "months": "<span color='#D3D3D3'><b>{}</b></span>",
         "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
         "weekdays": "<span color='#9ccfd8'><b>{}</b></span>"
+        }
       }
-    }
-  },
+    },
     "cpu": {
-        "format": "cpu:{usage}%",
+        "format": "{usage}% ",
         "tooltip": false
     },
     "memory": {
-        "format": "mem:{}%"
+        "format": "{}% "
     },
     "temperature": {
-        "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
-        "format-critical": "temp:{temperatureC}°C",
-        "format": "temp:{temperatureC}°C"
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "bkl:{percent}%"
+        "format": "{percent}% {icon}",
+        "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
     },
     "battery": {
         "states": {
+            // "good": 95,
+            "warning": 30,
             "critical": 20
         },
-        "format": "bat:{capacity}%",
-        "format-charging": "chrg:{capacity}%",
-        "format-plugged": "plg:{capacity}%",
-        "format-alt": "time:{time}"
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
     },
     "battery#bat2": {
         "bat": "BAT2"
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "wifi:{signalStrength}%",
-        "format-ethernet": "eth:{ipaddr}/{cidr}",
-        "tooltip-format": "{ifname} via {gwaddr}",
-        "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "Disconnected",
+        "format-wifi": "{signalStrength}% ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{essid} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "vol:{volume}% {format_source}",
-        "format-bluetooth": "bl:{volume}% {format_source}",
-        "format-bluetooth-muted": "bl:muted {format_source}",
-        "format-muted": "vol:muted {format_source}",
-        "format-source": "mic:{volume}%",
-        "format-source-muted": "mic:muted"
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
     }
-  }
 }
