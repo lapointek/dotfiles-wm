@@ -38,13 +38,12 @@ tooltip label {
 #network,
 #pulseaudio,
 #tray,
-#mode,
 #privacy,
 #idle_inhibitor,
 #scratchpad {
-  padding: 0px 5px;
   color: white;
   margin: 2px;
+  padding: 0px 5px;
 }
 
 #mode {
