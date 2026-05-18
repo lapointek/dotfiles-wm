@@ -59,13 +59,13 @@ tooltip label {
 }
 
 #battery.charging {
-    color: #26A65B;
+  color: #26A65B;
 }
 
 #pulseaudio.muted,
 #pulseaudio.source-muted,
 #idle_inhibitor.activated {
-    color: #718096;
+  color: #718096;
 }
 
 #privacy {
