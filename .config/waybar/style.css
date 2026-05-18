@@ -7,11 +7,11 @@
 }
 
 window#waybar {
-  background: #000000;
+  background: black;
 }
 
 tooltip {
-  background: #000000;
+  background: black;
   border: 2px solid #718096;
 }
 
@@ -40,6 +40,7 @@ tooltip label {
 #wireplumber,
 #tray,
 #mode,
+#privacy,
 #idle_inhibitor,
 #scratchpad {
   padding: 0px 5px;
@@ -57,10 +58,22 @@ tooltip label {
   color: #f53c3c;
 }
 
+#battery.charging {
+    color: #26A65B;
+}
+
+#pulseaudio.muted, #idle_inhibitor.activated {
+    color: #718096;
+}
+
+#privacy {
+  color: #f53c3c;
+}
+
 #network.disconnected {
   color: #f53c3c;
 }
 
 #temperature.critical {
-  color: #eb4d4b;
+  color: #f53c3c;
 }

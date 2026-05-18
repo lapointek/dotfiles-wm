@@ -15,6 +15,7 @@
     "modules-center": [
     ],
     "modules-right": [
+        "privacy",
         "idle_inhibitor",
         "pulseaudio",
         "network",
@@ -43,6 +44,17 @@
     //         "default": ""
     //     }
     // },
+    "privacy": {
+      "icon-size": 18,
+      "modules": [
+        {
+          "type": "screenshare"
+        },
+        {
+          "type": "audio-in"
+        }
+      ]
+    },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -109,9 +121,6 @@
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
