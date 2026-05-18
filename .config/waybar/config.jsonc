@@ -7,25 +7,25 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
-        "sway/workspaces",
-        "sway/mode",
-        "sway/scratchpad",
-        "sway/window"
+      "sway/workspaces",
+      "sway/mode",
+      "sway/scratchpad",
+      "sway/window"
     ],
     "modules-center": [
     ],
     "modules-right": [
-        "privacy",
-        "idle_inhibitor",
-        "pulseaudio",
-        "network",
-        "cpu",
-        "memory",
-        "temperature",
-        "backlight",
-        "battery",
-        "clock",
-        "tray"
+      "privacy",
+      "idle_inhibitor",
+      "pulseaudio",
+      "network",
+      "cpu",
+      "memory",
+      "temperature",
+      "backlight",
+      "battery",
+      "clock",
+      "tray"
     ],
     // Modules configuration
     // "sway/workspaces": {
@@ -56,43 +56,43 @@
       ]
     },
     "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+      "format": "<span style=\"italic\">{}</span>"
     },
     "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
+      "format": "{icon} {count}",
+      "show-empty": false,
+      "format-icons": ["", ""],
+      "tooltip": true,
+      "tooltip-format": "{app}: {title}"
     },
     "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
+      "format": "{icon}",
+      "format-icons": {
+        "activated": "",
+        "deactivated": ""
+      }
     },
     "tray": {
-        "icon-size": 21,
-        "spacing": 10
+      "icon-size": 21,
+      "spacing": 10
     },
     "clock": {
-    "format": "{:%d %b %I:%M %p}",
-    "tooltip-format": "<big>{:%A %m/%d}</big>\n<tt><small>{calendar}</small></tt>",
-    "calendar": {
-      "format": {
-        "months": "<span color='#D3D3D3'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
-        "weekdays": "<span color='#9ccfd8'><b>{}</b></span>"
+      "format": "{:%d %b %I:%M %p}",
+      "tooltip-format": "<big>{:%A %m/%d}</big>\n<tt><small>{calendar}</small></tt>",
+      "calendar": {
+        "format": {
+          "months": "<span color='#D3D3D3'><b>{}</b></span>",
+          "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+          "weekdays": "<span color='#9ccfd8'><b>{}</b></span>"
         }
       }
     },
     "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
+      "format": "{usage}% ",
+      "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+      "format": "{}% "
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -108,16 +108,16 @@
         "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
     },
     "battery": {
-        "states": {
+      "states": {
             // "good": 95,
             // "warning": 30,
             "critical": 20
-        },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
+      },
+      "format": "{capacity}% {icon}",
+      "format-full": "{capacity}% {icon}",
+      "format-charging": "{capacity}% ",
+      "format-plugged": "{capacity}% ",
+      "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
@@ -140,13 +140,13 @@
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+          "headphone": "",
+          "hands-free": "",
+          "headset": "",
+          "phone": "",
+          "portable": "",
+          "car": "",
+          "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
     }
