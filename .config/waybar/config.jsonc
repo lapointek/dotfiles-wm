@@ -77,12 +77,12 @@
       "spacing": 10
     },
     "clock": {
-      "format": "{:%d %b %I:%M %p}",
+      "format": "{:%b %d • %I:%M %p}",
       "tooltip-format": "<big>{:%A %m/%d}</big>\n<tt><small>{calendar}</small></tt>",
       "calendar": {
         "format": {
-          "months": "<span color='#D3D3D3'><b>{}</b></span>",
-          "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+          "months": "<span color='#ffffff'><b>{}</b></span>",
+          "today": "<span color='#f53c3c'><b><u>{}</u></b></span>",
           "weekdays": "<span color='#9ccfd8'><b>{}</b></span>"
         }
       }
