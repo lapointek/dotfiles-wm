@@ -7,9 +7,11 @@
 exec /usr/libexec/lxqt-policykit-agent
 exec kanshi
 exec_always kanshictl reload
-exec waybar
 exec nm-applet
 exec blueman-applet
+bar {
+    swaybar_command waybar
+}
 
 # Swayidle
 exec swayidle -w \
