@@ -63,7 +63,7 @@ output * bg $wallpaper fill
 client.focused #718096 #404552 #e0e0e0 #8f9eb4 #718096
 
 default_border pixel 2
-font pango:Noto Sans Mono 13
+font pango:Noto Sans Mono 12
 floating_modifier $mod normal
 
 set $cursor_theme Adwaita
