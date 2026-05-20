@@ -1,6 +1,7 @@
 * {
     bg: #121212;
-    selected: #718096;
+    foreground: #718096;
+    selected: #333333;
     text: #e0e0e0;
     font: "Noto Sans Mono 16";
 }
@@ -8,7 +9,7 @@
 window {
     background-color: @bg;
     border: 2px;
-    border-color: @selected;
+    border-color: @foreground;
     width: 40%;
 }
 
@@ -56,5 +57,5 @@ entry {
 }
 
 prompt {
-    text-color: @selected;
+    text-color: @foreground;
 }

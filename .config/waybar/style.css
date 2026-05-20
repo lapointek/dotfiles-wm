@@ -1,9 +1,9 @@
 /* Colors */
 @define-color waybar-bg #121212;
-@define-color waybar-fg #718096;
+@define-color waybar-fg #333333;
+@define-color waybar-border #718096;
 @define-color waybar-text #e0e0e0;
 @define-color waybar-critical #f53c3c;
-@define-color waybar-charging #26a65b;
 
 * {
   font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace;
@@ -19,7 +19,7 @@ window#waybar {
 
 tooltip {
   background: @waybar-bg;
-  border: 2px solid #718096;
+  border: 2px solid @waybar-border;
 }
 
 tooltip label {
@@ -61,16 +61,6 @@ tooltip label {
 
 #battery.critical:not(.charging) {
   color: @waybar-critical;
-}
-
-#battery.charging {
-  color: @waybar-charging;
-}
-
-#pulseaudio.muted,
-#pulseaudio.source-muted,
-#idle_inhibitor.activated {
-  color: @waybar-fg;
 }
 
 #privacy {
