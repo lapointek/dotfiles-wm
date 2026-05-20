@@ -53,15 +53,15 @@ input type:keyboard {
     xkb_layout "us"
 }
 
-#############
-#   Output  #
-#############
+##############
+#   Output   #
+##############
 set $wallpaper $HOME/Pictures/wallpapers/art/wallhaven-vq75j8.jpg
 output * bg $wallpaper fill
 
-#############################
-#   Appearance & Behaviour  #
-#############################
+##############################
+#   Appearance & Behaviour   #
+##############################
 # class border bg text indicator child_border
 client.focused #718096 #404552 #e0e0e0 #8f9eb4 #718096
 
@@ -95,17 +95,17 @@ exec {
     gsettings set org.gnome.desktop.interface document-font-name $document_font_name
 }
 
-###################
-#   Window Rules  #
-###################
+####################
+#   Window Rules   #
+####################
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
 for_window [app_id="pavucontrol"] floating enable resize set width 800 px height 600 px move position center
 for_window [app_id="lxqt-policykit-agent"] floating enable move position center
 
-#################
-#  Keybindings  #
-#################
+###################
+#   Keybindings   #
+###################
 ###  Basic Operations
 bindsym $mod+q kill
 bindsym $mod+Shift+c reload
@@ -239,7 +239,7 @@ bindsym --locked {
     XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 }
 
-##############
-#  Includes  #
-##############
+################
+#   Includes   #
+################
 include /etc/sway/config.d/*
