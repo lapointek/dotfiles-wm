@@ -1,3 +1,10 @@
+/* Colors */
+@define-color waybar-bg #121212;
+@define-color waybar-fg #718096;
+@define-color waybar-text #e0e0e0;
+@define-color waybar-critical #f53c3c;
+@define-color waybar-charging #26a65b;
+
 * {
   font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace;
   font-size: 17px;
@@ -7,25 +14,25 @@
 }
 
 window#waybar {
-  background: black;
+  background: @waybar-bg;
 }
 
 tooltip {
-  background: black;
+  background: @waybar-bg;
   border: 2px solid #718096;
 }
 
 tooltip label {
-  color: white;
+  color: @waybar-text;
 }
 
 #workspaces button {
   padding: 0 3px;
-  color: white;
+  color: @waybar-text;
 }
 
 #workspaces button.focused {
-  background-color: #718096;
+  background-color: @waybar-fg;
 }
 
 #clock,
@@ -41,39 +48,39 @@ tooltip label {
 #privacy,
 #idle_inhibitor,
 #scratchpad {
-  color: white;
+  color: @waybar-text;
   margin: 2px;
   padding: 0px 5px;
 }
 
 #mode {
-  color: #f53c3c;
+  color: @waybar-critical;
   margin: 2px;
   padding: 0px 5px;
 }
 
 #battery.critical:not(.charging) {
-  color: #f53c3c;
+  color: @waybar-critical;
 }
 
 #battery.charging {
-  color: #26A65B;
+  color: @waybar-charging;
 }
 
 #pulseaudio.muted,
 #pulseaudio.source-muted,
 #idle_inhibitor.activated {
-  color: #718096;
+  color: @waybar-fg;
 }
 
 #privacy {
-  color: #f53c3c;
+  color: @waybar-critical;
 }
 
 #network.disconnected {
-  color: #f53c3c;
+  color: @waybar-critical;
 }
 
 #temperature.critical {
-  color: #f53c3c;
+  color: @waybar-critical;
 }

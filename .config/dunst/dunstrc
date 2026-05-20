@@ -11,9 +11,9 @@
     horizontal_padding = 10
     frame_width = 2
     gap_size = 3
-    font = "Noto Sans Mono 14"
+    font = "Noto Sans Mono 14 "
 
-    background = "#000000"
+    background = "#121212"
 
     icon_theme = "Numix-Circle"
     enable_recursive_icon_lookup = true
@@ -23,12 +23,12 @@
 
 [urgency_low]
     frame_color = "#718096"
-    format = "<b><span foreground='#718096'>%s</span></b>\n%b"
+    format = "<span foreground='#e0e0e0'>%s</span>\n%b"
 
 [urgency_normal]
     frame_color = "#718096"
-    format = "<b><span foreground='#718096'>%s</span></b>\n%b"
+    format = "<span foreground='#e0e0e0'>%s</span>\n%b"
 
 [urgency_critical]
     frame_color = "#f53c3c"
-    format = "<b><span foreground='#f53c3c'>%s</span></b>\n%b"
+    format = "<span foreground='#e0e0e0'>%s</span>\n%b"
