@@ -46,7 +46,6 @@ tooltip label {
 #pulseaudio,
 #tray,
 #privacy,
-#idle_inhibitor,
 #scratchpad {
   color: @waybar-text;
   margin: 2px;
