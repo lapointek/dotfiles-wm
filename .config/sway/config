@@ -61,7 +61,6 @@ output * bg $wallpaper fill
 ##############################
 #   Appearance & Behaviour   #
 ##############################
-hide_edge_borders smart
 workspace_auto_back_and_forth yes
 focus_on_window_activation urgent
 
@@ -116,7 +115,6 @@ for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
 for_window [app_id="pavucontrol"] floating enable resize set width 800 px height 600 px move position center
 for_window [app_id="lxqt-policykit-agent"] floating enable move position center
-for_window [app_id="thunar"] floating enable, move position center
 
 ###################
 #   Keybindings   #
