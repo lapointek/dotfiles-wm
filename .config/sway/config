@@ -103,15 +103,15 @@ exec {
 ####################
 #   Window Rules   #
 ####################
-#--- Workspace Assignments
+#--- Workspace Assignments ---
 assign [app_id="brave-browser"] workspace number 1
 assign [app_id="code"] workspace number 2
 
-#--- Focus on Open
+#--- Focus on Open ---
 for_window [app_id="brave-browser"] focus
 for_window [app_id="code"] focus
 
-#--- Floating Windows
+#--- Floating Windows ---
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
 for_window [app_id="pavucontrol"] floating enable resize set width 800 px height 600 px move position center
@@ -207,7 +207,6 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
 
 #--- Scratchpad ---
 bindsym $mod+Shift+minus move scratchpad
